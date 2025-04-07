@@ -121,7 +121,7 @@ It is recommended that you use environment variables to configure the Pi-hole do
 
 To set a specific password for the web interface, use the environment variable `FTLCONF_webserver_api_password`.
 
-If this variable is not detected and you have not already set one via `pihole setpassword` / `pihole-FTL --config webserver.api.password` inside the container, then a random password will be assigned on startup. This will be printed to the log. Run `docker logs pihole | grep random password` to find it.
+If this variable is not detected and you have not already set one via `pihole setpassword` / `pihole-FTL --config webserver.api.password` inside the container, then a random password will be assigned on startup. This will be printed to the log. Run `docker logs pihole | grep "random password"` to find it.
 
 > [!NOTE]
 > To _explicitly_ set no password, set `FTLCONF_webserver_api_password: ''`
@@ -133,7 +133,7 @@ If this variable is not detected and you have not already set one via `pihole se
 | Variable | Default | Value | Description |
 | -------- | ------- | ----- | ---------- |
 | `TZ` | UTC | `<Timezone>` | Set your [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to make sure logs rotate at local midnight instead of at UTC midnight.
-| `FTLCONF_webserver_api_password` | random | `<Admin password>` | <http://pi.hole/admin> password.<br>Run `docker logs pihole \| grep random` to find your random password.
+| `FTLCONF_webserver_api_password` | random | `<Admin password>` | <http://pi.hole/admin> password.<br>Run `docker logs pihole \| grep "random password"` to find your random password.
 | `FTLCONF_dns_upstreams` |  `8.8.8.8;8.8.4.4` | IPs delimited by `;` | Upstream DNS server(s) for Pi-hole to forward queries to, separated by a semicolon.<br><br>Supports non-standard ports with: `#[port number]`, e.g `127.0.0.1#5053;8.8.8.8;8.8.4.4`.<br><br>Supports [Docker service names and links](https://docs.docker.com/compose/networking/) instead of IPs, e.g `upstream0,upstream1` where `upstream0` and `upstream1` are the service names of or links to docker services.<br><br>**Note:** The existence of this environment variable assumes this as the _sole_ management of upstream DNS. Upstream DNS added via the web interface will be overwritten on container restart/recreation. |
 
 ### Optional Variables
